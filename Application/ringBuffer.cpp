@@ -2,6 +2,12 @@
 #include <opencv2/opencv.hpp>
 #include "ringBuffer.h"
 
+#ifdef _DEBUG
+#pragma comment(lib, "opencv_world455d.lib")
+#else
+#pragma comment(lib, "opencv_world455.lib")
+#endif
+
 RingBuffer::RingBuffer(unsigned int capacity) {
 	m_capacity = capacity;
 	img = make_unique<int[]>(m_capacity);

@@ -1,5 +1,11 @@
 #pragma once
 
+#ifdef _DEBUG
+#pragma comment(lib, "opencv_world455d.lib")
+#else
+#pragma comment(lib, "opencv_world455.lib")
+#endif
+
 #include <memory>
 #include <opencv2/opencv.hpp>
 
