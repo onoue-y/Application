@@ -34,6 +34,7 @@ bool RingBuffer::Get(Mat* frame, Rect* contour) {
 		*frame = img[head];
 		*contour = coord[head];
 		head = (head + 1) % m_capacity;
+		num--;
 		return true;
 	}
 	else {
