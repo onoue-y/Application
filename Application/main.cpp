@@ -27,8 +27,7 @@ int main() {
 
 	Capture* capture;
 	capture = new Capture();
-	cap.set(CAP_PROP_FPS, j["fps"]);
-	if (face->cameraCheck() == -1) return -1;
+	if (capture->Check() == -1) return -1;
 	capture->CapImage();
 
 	return 0;
