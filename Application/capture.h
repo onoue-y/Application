@@ -1,13 +1,13 @@
 #pragma once
 
+#include <opencv2/opencv.hpp>
+#include <vector>
+
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
 #else
 #pragma comment(lib, "opencv_world455.lib")
 #endif
-
-#include <opencv2/opencv.hpp>
-#include <vector>
 
 using namespace std;
 using namespace cv;
