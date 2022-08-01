@@ -9,11 +9,12 @@
 #endif
 
 using namespace std;
+using namespace cv;
 
 RingBuffer::RingBuffer(unsigned int capacity) {
 	m_capacity = capacity;
-	img = make_unique<int[]>(m_capacity);
-	coord = make_unique<int[]>(m_capacity);
+	img = make_unique<Mat[]>(m_capacity);
+	coord = make_unique<Rect[]>(m_capacity);
 	num = 0;
 	head = 0;
 	tail = 0;

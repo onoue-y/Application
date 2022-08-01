@@ -1,4 +1,6 @@
 #pragma once
+#include <memory>
+#include <opencv2/opencv.hpp>
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -6,15 +8,15 @@
 #pragma comment(lib, "opencv_world455.lib")
 #endif
 
-#include <memory>
-#include <opencv2/opencv.hpp>
+
 
 using namespace std;
+using namespace cv;
 
 class RingBuffer {
 private:
 	unsigned int m_capacity;
-	int num;
+	unsigned int num;
 	unique_ptr<Mat[]> img;
 	unique_ptr<Rect[]> coord;
 	int head, tail;
