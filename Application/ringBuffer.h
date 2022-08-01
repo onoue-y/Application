@@ -9,6 +9,8 @@
 #include <memory>
 #include <opencv2/opencv.hpp>
 
+using namespace std;
+
 class RingBuffer {
 private:
 	unsigned int m_capacity;

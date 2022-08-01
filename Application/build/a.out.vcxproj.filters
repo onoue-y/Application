@@ -16,6 +16,9 @@
     <ClCompile Include="C:\Users\y-onoue\Findix\Application\Application\queue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\y-onoue\Findix\Application\Application\ringBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\y-onoue\Findix\Application\Application\CMakeLists.txt" />

@@ -8,6 +8,8 @@
 #pragma comment(lib, "opencv_world455.lib")
 #endif
 
+using namespace std;
+
 RingBuffer::RingBuffer(unsigned int capacity) {
 	m_capacity = capacity;
 	img = make_unique<int[]>(m_capacity);
