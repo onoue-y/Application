@@ -321,7 +321,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\y-onoue\Findix\Application\Application\capture.cpp" />
     <ClCompile Include="C:\Users\y-onoue\Findix\Application\Application\detect.cpp" />
     <ClCompile Include="C:\Users\y-onoue\Findix\Application\Application\viewer.cpp" />
-    <ClCompile Include="C:\Users\y-onoue\Findix\Application\Application\queue.cpp" />
     <ClCompile Include="C:\Users\y-onoue\Findix\Application\Application\ringBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>

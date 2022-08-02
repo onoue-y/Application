@@ -3,7 +3,6 @@
 #include "libs/json.hpp"
 #include "capture.h"
 #include "detect.h"
-#include "queue.h"
 #include "viewer.h"
 #include "ringBuffer.h"
 
@@ -26,9 +25,9 @@ int main() {
 	RingBuffer ringBuffer(j["bufferSize"]);
 
 	Capture* capture;
-	capture = new Capture();
+	capture = new Capture(j["fps"]);
 	if (capture->Check() == -1) return -1;
-	capture->CapImage();
+	capture->CapImage(&ringBuffer);
 
 	return 0;
 }

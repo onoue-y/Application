@@ -1,4 +1,5 @@
 #include "capture.h"
+#include "ringBuffer.h"
 #include <opencv2/opencv.hpp>
 #include <vector>
 
@@ -12,9 +13,10 @@ using namespace std;
 using namespace cv;
 
 //コンストラクタ
-Capture::Capture() {
+Capture::Capture(int fps) {
     //カメラの起動
     cap.open(0);
+    cap.set(CAP_PROP_FPS, fps);
 }
 
 //カメラが正常にオープンしたことの確認
@@ -23,9 +25,11 @@ int Capture::Check() {
 }
 
 //画像の表示
-void Capture::CapImage() {
+void Capture::CapImage(RingBuffer* ringBuffer) {
     while (cap.read(frame)) {
         imshow("image", frame);         //画像を表示．
+
+        ringBuffer->Put(frame, {0,0,0,0});
 
         const int key = waitKey(1);
         if (key == 27) break; //キーコード [Esc]:27

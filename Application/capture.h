@@ -2,6 +2,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
+#include "ringBuffer.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -17,7 +18,7 @@ private:
 	VideoCapture cap;
 	Mat frame;					//取得したフレーム
 public:
-	Capture();			//コンストラクタ
+	Capture(int fps);			//コンストラクタ
 	int Check();			//カメラが正常にオープンしたことの確認
-	void CapImage();		//画像の取得、保存
+	void CapImage(RingBuffer* ringBuffer);		//画像の取得、保存
 };
