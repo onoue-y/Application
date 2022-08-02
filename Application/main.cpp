@@ -19,7 +19,7 @@ using json = nlohmann::json;
 
 int main() {
 	FILE* fp;
-	queue<int> message;
+	queue<int> message1, message2;
 
 	fopen_s(&fp, "../config/setting.json", "r");
 	auto j = json::parse(fp);
@@ -29,7 +29,7 @@ int main() {
 	Capture* capture;
 	capture = new Capture(j["fps"]);
 	if (capture->Check() == -1) return -1;
-	capture->CapImage(&ringBuffer, &message);
+	capture->CapImage(&ringBuffer, &message1);
 
 	return 0;
 }
