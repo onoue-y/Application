@@ -1,6 +1,6 @@
 ^C:\USERS\Y-ONOUE\FINDIX\APPLICATION\APPLICATION\BUILD\CMAKEFILES\1F2B673F8A8821A30D24DB942B2851D6\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/y-onoue/Findix/Application/Application -BC:/Users/y-onoue/Findix/Application/Application/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/y-onoue/Findix/Application/Application/build/test_cmake.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/y-onoue/Findix/Application/Application -BC:/Users/y-onoue/Findix/Application/Application/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/y-onoue/Findix/Application/Application/build/Project.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
