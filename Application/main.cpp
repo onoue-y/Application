@@ -1,6 +1,7 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <queue>
+#include <thread>
 #include "libs/json.hpp"
 #include "capture.h"
 #include "detect.h"
@@ -29,7 +30,8 @@ int main() {
 	Capture* capture;
 	capture = new Capture(j["fps"]);
 	if (capture->Check() == -1) return -1;
-	capture->CapImage(&ringBuffer, &message1);
-
+	//capture->CapImage(&ringBuffer, &message1);
+	thread thread1(&Capture::CapImage, capture, &ringBuffer, &message1);
+	thread1.join();
 	return 0;
 }
