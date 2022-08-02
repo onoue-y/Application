@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include <queue>
+#include <vector>
 #include "detect.h"
 #include "ringBuffer.h"
 
@@ -21,8 +22,9 @@ void Detect::faceDetection(RingBuffer* ringBuffer, queue<int>* message) {
 			case 0:
 				break;
 			case 1:
-				ringBuffer->Get(&frame, &contour);
+				ringBuffer->GetDetect(&frame);
 				cascade.detectMultiScale(frame, contour, 1.1, 3, 0, Size(30, 30));
+				if (contour.size() != 0) ringBuffer->PutDetect(contour);
 				break;
 			case 2:
 				break;

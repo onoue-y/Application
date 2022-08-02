@@ -1,6 +1,7 @@
 #pragma once
 #include <opencv2/opencv.hpp>
 #include <queue>
+#include <vector>
 #include "ringBuffer.h"
 
 #ifdef _DEBUG
@@ -16,7 +17,7 @@ class Detect {
 private:
 	CascadeClassifier cascade;
 	Mat frame;					//取得したフレーム
-	Rect contour;		//検出した顔の座標データ(x,y,width,height)
+	vector<Rect> contour;		//検出した顔の座標データ(x,y,width,height)
 	int messageNum;
 public:
 	void faceDetection(RingBuffer* ringBuffer, queue<int>* message);
