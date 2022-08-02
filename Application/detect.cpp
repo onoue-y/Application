@@ -32,6 +32,7 @@ void Detect::faceDetection(RingBuffer* ringBuffer, queue<int>* message1, queue<i
 			default:
 				break;
 			}
+			message1->pop();
 		}	
 	}
 }
