@@ -2,6 +2,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
+#include <queue>
 #include "ringBuffer.h"
 
 #ifdef _DEBUG
@@ -20,5 +21,5 @@ private:
 public:
 	Capture(int fps);			//コンストラクタ
 	int Check();			//カメラが正常にオープンしたことの確認
-	void CapImage(RingBuffer* ringBuffer);		//画像の取得、保存
+	void CapImage(RingBuffer* ringBuffer, queue<int*> message);		//画像の取得、保存
 };

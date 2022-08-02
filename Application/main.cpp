@@ -1,5 +1,6 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include <queue>
 #include "libs/json.hpp"
 #include "capture.h"
 #include "detect.h"
@@ -18,6 +19,7 @@ using json = nlohmann::json;
 
 int main() {
 	FILE* fp;
+	queue<int*> message;
 
 	fopen_s(&fp, "../config/setting.json", "r");
 	auto j = json::parse(fp);
@@ -27,7 +29,7 @@ int main() {
 	Capture* capture;
 	capture = new Capture(j["fps"]);
 	if (capture->Check() == -1) return -1;
-	capture->CapImage(&ringBuffer);
+	capture->CapImage(&ringBuffer, message);
 
 	return 0;
 }
