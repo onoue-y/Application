@@ -31,7 +31,7 @@ void Capture::CapImage(RingBuffer* ringBuffer, queue<int>* message) {
         imshow("image", frame);         //画像を表示．
 
         ringBuffer->Put(frame, {0,0,0,0});
-        message->push(0);
+        message->push(1);
 
         const int key = waitKey(1);
         if (key == 27) break; //キーコード [Esc]:27
