@@ -19,10 +19,12 @@ private:
 	unsigned int num;
 	unique_ptr<Mat[]> img;
 	unique_ptr<Rect[]> coord;
-	int head, tail;
+	int head, tail, headDetect;
 public:
 	RingBuffer(unsigned int capacity);
 	void Put(Mat frame, Rect contour);
+	void PutDetect(Rect contour);
 	bool Get(Mat* frame, Rect* contour);
+	void GetDetect(Mat* frame);
 	void Clear();
 };

@@ -18,16 +18,22 @@ RingBuffer::RingBuffer(unsigned int capacity) {
 	num = 0;
 	head = 0;
 	tail = 0;
+	headDetect = 0;
 }
 void RingBuffer::Put(Mat frame, Rect contour) {
 	if ((head == tail) && (num>=m_capacity)) {
 		head = (head + 1) % m_capacity;
+		headDetect = (headDetect + 1) % m_capacity;
 		num--;
 	}
 	img[tail] = frame;
 	coord[tail] = contour;
 	num++;
 	tail = (tail + 1) % m_capacity;
+}
+void RingBuffer::PutDetect(Rect contour) {
+	coord[headDetect] = contour;
+	headDetect = (headDetect + 1) % m_capacity;
 }
 bool RingBuffer::Get(Mat* frame, Rect* contour) {
 	if (num != 0) {
@@ -40,6 +46,9 @@ bool RingBuffer::Get(Mat* frame, Rect* contour) {
 	else {
 		return false;
 	}
+}
+void RingBuffer::GetDetect(Mat* frame) {
+	*frame = img[headDetect];
 }
 void RingBuffer::Clear() {
 	num = 0;
