@@ -1,4 +1,4 @@
 {
-  "bufferSize": 200,
-  "fps": 30
+  "bufferSize": 1000,
+  "fps": 10
 }
