@@ -26,5 +26,4 @@ public:
 	void PutDetect(Rect contour);
 	bool Get(Mat* frame, Rect* contour);
 	void GetDetect(Mat* frame);
-	void Clear();
 };

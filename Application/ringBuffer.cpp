@@ -49,8 +49,3 @@ bool RingBuffer::Get(Mat* frame, Rect* contour) {
 void RingBuffer::GetDetect(Mat* frame) {
 	*frame = img[headDetect];
 }
-void RingBuffer::Clear() {
-	num = 0;
-	head = 0;
-	tail = 0;
-}
