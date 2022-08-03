@@ -26,14 +26,10 @@ int Capture::Check() {
 }
 
 //画像の表示
-void Capture::CapImage(RingBuffer* ringBuffer, queue<int>* message) {
+void Capture::CapImage(RingBuffer* ringBuffer, queue<int>* message1) {
     while (cap.read(frame)) {
-        imshow("image", frame);         //画像を表示．
 
         ringBuffer->Put(frame, {0,0,0,0});
-        message->push(1);
-
-        const int key = waitKey(1);
-        if (key == 27) break; //キーコード [Esc]:27
+        message1->push(1);
     }
 }
