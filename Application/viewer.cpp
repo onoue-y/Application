@@ -33,6 +33,6 @@ void Viewer::view(RingBuffer* ringBuffer, queue<int>* message2) {
 			}
 		}
 		const int key = waitKey(1);
-		if (key == 27) break; //キーコード [Esc]:27
+		if (key == 27) exit(0); //キーコード [Esc]:27
 	}
 }
