@@ -29,7 +29,7 @@ int Capture::Check() {
 void Capture::CapImage(RingBuffer* ringBuffer, queue<int>* message1) {
     while (cap.read(frame)) {
 
-        ringBuffer->Put(frame, {0,0,0,0});
+        ringBuffer->Put(frame);
         message1->push(1);
     }
 }

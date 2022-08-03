@@ -20,14 +20,13 @@ RingBuffer::RingBuffer(unsigned int capacity) {
 	tail = 0;
 	headDetect = 0;
 }
-void RingBuffer::Put(Mat frame, Rect contour) {
+void RingBuffer::Put(Mat frame) {
 	if ((head == tail) && (num>=m_capacity)) {
 		head = (head + 1) % m_capacity;
 		headDetect = (headDetect + 1) % m_capacity;
 		num--;
 	}
 	img[tail] = frame;
-	coord[tail] = contour;
 	num++;
 	tail = (tail + 1) % m_capacity;
 }

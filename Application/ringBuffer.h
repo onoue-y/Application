@@ -22,7 +22,7 @@ private:
 	int head, tail, headDetect;
 public:
 	RingBuffer(unsigned int capacity);
-	void Put(Mat frame, Rect contour);
+	void Put(Mat frame);
 	void PutDetect(Rect contour);
 	bool Get(Mat* frame, Rect* contour);
 	void GetDetect(Mat* frame);
