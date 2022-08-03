@@ -17,6 +17,7 @@ void Viewer::view(RingBuffer* ringBuffer, queue<int>* message2) {
 	while (1) {
 		if (!(message2->empty())) {
 			messageNum = message2->front();
+			message2->pop();
 			switch (messageNum) {
 			case 0:
 				break;
@@ -30,7 +31,6 @@ void Viewer::view(RingBuffer* ringBuffer, queue<int>* message2) {
 			default:
 				break;
 			}
-			message2->pop();
 		}
 		const int key = waitKey(1);
 		if (key == 27) break; //キーコード [Esc]:27

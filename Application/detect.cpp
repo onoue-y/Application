@@ -18,6 +18,7 @@ void Detect::faceDetection(RingBuffer* ringBuffer, queue<int>* message1, queue<i
 	while (1) {
 		if (!(message1->empty())) {
 			messageNum = message1->front();
+			message1->pop();
 			switch (messageNum) {
 			case 0:
 				break;
@@ -25,6 +26,7 @@ void Detect::faceDetection(RingBuffer* ringBuffer, queue<int>* message1, queue<i
 				ringBuffer->GetDetect(&frame);
 				cascade.detectMultiScale(frame, contour, 1.1, 3, 0, Size(30, 30));
 				if (contour.size() != 0) ringBuffer->PutDetect(contour[0]);
+				else ringBuffer->PutDetect({ 0,0,0,0 });
 				message2->push(1);
 				break;
 			case 2:
@@ -32,7 +34,6 @@ void Detect::faceDetection(RingBuffer* ringBuffer, queue<int>* message1, queue<i
 			default:
 				break;
 			}
-			message1->pop();
 		}	
 	}
 }
