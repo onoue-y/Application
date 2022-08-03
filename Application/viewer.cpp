@@ -23,7 +23,7 @@ void Viewer::view(RingBuffer* ringBuffer, queue<int>* message2) {
 				break;
 			case 1:
 				ringBuffer->Get(&frame, &contour);
-				rectangle(frame, Point(contour.x, contour.y), Point(contour.x + contour.width, contour.y + contour.height), Scalar(0, 0, 255), 3);
+				if (contour != Rect{-1,-1,-1,-1}) rectangle(frame, Point(contour.x, contour.y), Point(contour.x + contour.width, contour.y + contour.height), Scalar(0, 0, 255), 3);
 				imshow("image", frame);         //‰æ‘œ‚ğ•\¦D
 				break;
 			case 2:
