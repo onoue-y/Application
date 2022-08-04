@@ -26,10 +26,10 @@ int Capture::Check() {
 }
 
 //‰æ‘œ‚Ì•\Ž¦
-void Capture::CapImage(RingBuffer* ringBuffer, queue<int>* message1) {
+void Capture::CapImage(RingBuffer* ringBuffer, queue<int>* imgGetMessage) {
     while (cap.read(frame)) {
 
         ringBuffer->Put(frame);
-        message1->push(1);
+        imgGetMessage->push(1);
     }
 }

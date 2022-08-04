@@ -13,12 +13,12 @@
 using namespace std;
 using namespace cv;
 
-void Detect::faceDetection(RingBuffer* ringBuffer, queue<int>* message1, queue<int>* message2) {
+void Detect::faceDetection(RingBuffer* ringBuffer, queue<int>* imgGetMessage, queue<int>* message2) {
 	cascade.load("C:/opencv/build/etc/haarcascades/haarcascade_frontalface_default.xml");
 	while (1) {
-		if (!(message1->empty())) {
-			messageNum = message1->front();
-			message1->pop();
+		if (!(imgGetMessage->empty())) {
+			messageNum = imgGetMessage->front();
+			imgGetMessage->pop();
 			switch (messageNum) {
 			case 0:
 				break;
