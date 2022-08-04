@@ -2,8 +2,8 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include <queue>
 #include "ringBuffer.h"
+#include "msgQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -21,5 +21,5 @@ private:
 public:
 	Capture(int fps);			//コンストラクタ
 	int Check();			//カメラが正常にオープンしたことの確認
-	void CapImage(RingBuffer* ringBuffer, queue<int>* imgGetMessage);		//画像の取得、保存
+	void CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage);		//画像の取得、保存
 };

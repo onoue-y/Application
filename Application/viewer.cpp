@@ -1,8 +1,8 @@
 #include <opencv2/opencv.hpp>
-#include <queue>
 #include <vector>
 #include "viewer.h"
 #include "ringBuffer.h"
+#include "msgQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -13,11 +13,10 @@
 using namespace std;
 using namespace cv;
 
-void Viewer::view(RingBuffer* ringBuffer, queue<int>* coordGetMessage) {
+void Viewer::view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage) {
 	while (1) {
 		if (!(coordGetMessage->empty())) {
-			messageNum = coordGetMessage->front();
-			coordGetMessage->pop();
+			coordGetMessage->receive(&messageNum);
 			switch (messageNum) {
 			case 0:
 				break;

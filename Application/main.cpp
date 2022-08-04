@@ -1,12 +1,12 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include <queue>
 #include <thread>
 #include "libs/json.hpp"
 #include "capture.h"
 #include "detect.h"
 #include "viewer.h"
 #include "ringBuffer.h"
+#include "msgQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -20,7 +20,7 @@ using json = nlohmann::json;
 
 int main() {
 	FILE* fp;
-	queue<int> imgGetMessage, coordGetMessage;
+	MsgQueue imgGetMessage, coordGetMessage;
 	Detect detect;
 	Viewer viewer;
 	fopen_s(&fp, "../config/setting.json", "r");

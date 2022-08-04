@@ -1,8 +1,8 @@
 #pragma once
 #include <opencv2/opencv.hpp>
-#include <queue>
 #include <vector>
 #include "ringBuffer.h"
+#include "msgQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -19,5 +19,5 @@ private:
 	Rect contour;
 	int messageNum;
 public:
-	void view(RingBuffer* ringBuffer, queue<int>* coordGetMessage);
+	void view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage);
 };

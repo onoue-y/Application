@@ -1,8 +1,8 @@
 #include "capture.h"
 #include "ringBuffer.h"
+#include "msgQueue.h"
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include <queue>
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -26,10 +26,10 @@ int Capture::Check() {
 }
 
 //‰æ‘œ‚Ì•\Ž¦
-void Capture::CapImage(RingBuffer* ringBuffer, queue<int>* imgGetMessage) {
+void Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage) {
     while (cap.read(frame)) {
 
         ringBuffer->Put(frame);
-        imgGetMessage->push(1);
+        imgGetMessage->send(1);
     }
 }
