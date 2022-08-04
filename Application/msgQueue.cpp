@@ -1,10 +1,6 @@
 #include <queue>
 #include "msgQueue.h"
 
-MsgQueue::MsgQueue() {
-	head = nullptr;
-	tail = nullptr;
-}
 void MsgQueue::send(int message) {
 	msg_que.push(message);
 }

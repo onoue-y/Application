@@ -31,11 +31,11 @@ int main() {
 	Capture* capture;
 	capture = new Capture(j["fps"]);
 	if (capture->Check() == -1) return -1;
-	thread capture(&Capture::CapImage, capture, &ringBuffer, &imgGetMessage);
-	thread detect(&Detect::faceDetection, &detect, &ringBuffer, &imgGetMessage, &coordGetMessage);
-	thread viewer(&Viewer::view, &viewer, &ringBuffer, &coordGetMessage);
-	capture.join();
-	detect.join();
-	viewer.join();
+	thread capThread(&Capture::CapImage, capture, &ringBuffer, &imgGetMessage);
+	thread detThread(&Detect::faceDetection, &detect, &ringBuffer, &imgGetMessage, &coordGetMessage);
+	thread viewThread(&Viewer::view, &viewer, &ringBuffer, &coordGetMessage);
+	capThread.join();
+	detThread.join();
+	viewThread.join();
 	return 0;
 }
