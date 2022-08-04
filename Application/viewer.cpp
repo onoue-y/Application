@@ -13,11 +13,11 @@
 using namespace std;
 using namespace cv;
 
-void Viewer::view(RingBuffer* ringBuffer, queue<int>* message2) {
+void Viewer::view(RingBuffer* ringBuffer, queue<int>* coordGetMessage) {
 	while (1) {
-		if (!(message2->empty())) {
-			messageNum = message2->front();
-			message2->pop();
+		if (!(coordGetMessage->empty())) {
+			messageNum = coordGetMessage->front();
+			coordGetMessage->pop();
 			switch (messageNum) {
 			case 0:
 				break;

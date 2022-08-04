@@ -20,5 +20,5 @@ private:
 	vector<Rect> contour;		//検出した顔の座標データ(x,y,width,height)
 	int messageNum;
 public:
-	void faceDetection(RingBuffer* ringBuffer, queue<int>* imgGetMessage, queue<int>* message2);
+	void faceDetection(RingBuffer* ringBuffer, queue<int>* imgGetMessage, queue<int>* coordGetMessage);
 };
