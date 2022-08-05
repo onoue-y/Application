@@ -4,6 +4,7 @@
 #include <vector>
 #include "ringBuffer.h"
 #include "msgQueue.h"
+#include "constants.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")

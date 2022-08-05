@@ -3,6 +3,7 @@
 #include "viewer.h"
 #include "ringBuffer.h"
 #include "msgQueue.h"
+#include "constants.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -14,11 +15,11 @@ using namespace std;
 using namespace cv;
 
 int Viewer::view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage, MsgQueue* keyMessage) {
-	while (1) {
+	while (true) {
 		if (!(keyMessage->empty())) {
 			keyMessage->receive(&messageNum);
 			switch (messageNum) {
-			case 2:
+			case escMessage:
 				return 0;
 			default:
 				break;
@@ -27,16 +28,16 @@ int Viewer::view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage, MsgQueue* ke
 		if (!(coordGetMessage->empty())) {
 			coordGetMessage->receive(&messageNum);
 			switch (messageNum) {
-			case 1:
+			case getMessage:
 				ringBuffer->Get(&frame, &contour);
-				if (contour != Rect{-1,-1,-1,-1}) rectangle(frame, Point(contour.x, contour.y), Point(contour.x + contour.width, contour.y + contour.height), Scalar(0, 0, 255), 3);
+				if (contour != notDetect) rectangle(frame, Point(contour.x, contour.y), Point(contour.x + contour.width, contour.y + contour.height), Scalar(blue, green, red), thickness);
 				imshow("image", frame);         //画像を表示．
 				break;
 			default:
 				break;
 			}
 		}
-		const int key = waitKey(1);
-		if (key == 27) exit(0); //キーコード [Esc]:27
+		const int key = waitKey(waitSecond);
+		if (key == esc) exit(0); //キーコード [Esc]:27
 	}
 }

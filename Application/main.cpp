@@ -7,6 +7,7 @@
 #include "viewer.h"
 #include "ringBuffer.h"
 #include "msgQueue.h"
+#include "constants.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -32,7 +33,7 @@ int main() {
 	capture = new Capture(j["fps"]);
 	try
 	{
-		if (capture->Check() == -1) throw "カメラが正常にオープンしませんでした。";
+		if (capture->Check() == openError) throw "カメラが正常にオープンしませんでした。";
 		thread capThread(&Capture::CapImage, capture, &ringBuffer, &imgGetMessage, &keyMessage);
 		thread detThread(&Detect::faceDetection, &detect, &ringBuffer, &imgGetMessage, &coordGetMessage, &keyMessage);
 		thread viewThread(&Viewer::view, &viewer, &ringBuffer, &coordGetMessage, &keyMessage);

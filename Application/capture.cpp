@@ -1,6 +1,7 @@
 #include "capture.h"
 #include "ringBuffer.h"
 #include "msgQueue.h"
+#include "constants.h"
 #include <opencv2/opencv.hpp>
 #include <vector>
 
@@ -22,7 +23,7 @@ Capture::Capture(int fps) {
 
 //カメラが正常にオープンしたことの確認
 int Capture::Check() {
-    if (!cap.isOpened()) return -1;
+    if (!cap.isOpened()) return openError;
 }
 
 //画像の表示
@@ -31,13 +32,13 @@ int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage, MsgQueue*
         if (!(keyMessage->empty())) {
             keyMessage->receive(&messageNum);
             switch (messageNum) {
-            case 2:
+            case escMessage:
                 return 0;
             default:
                 break;
             }
         }
         ringBuffer->Put(frame);
-        imgGetMessage->send(1);
+        imgGetMessage->send(getMessage);
     }
 }

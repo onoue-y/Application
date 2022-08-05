@@ -1,5 +1,6 @@
 #include <queue>
 #include "msgQueue.h"
+#include "constants.h"
 
 void MsgQueue::send(int message) {
 	msg_que.push(message);

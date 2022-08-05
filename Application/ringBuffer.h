@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <opencv2/opencv.hpp>
+#include "constants.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -16,7 +17,7 @@ using namespace cv;
 class RingBuffer {
 private:
 	unsigned int m_capacity;
-	unsigned int num;
+	unsigned int size;
 	unique_ptr<Mat[]> img;
 	unique_ptr<Rect[]> coord;
 	int head, tail, headDetect;
