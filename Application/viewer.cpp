@@ -27,14 +27,10 @@ int Viewer::view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage, MsgQueue* ke
 		if (!(coordGetMessage->empty())) {
 			coordGetMessage->receive(&messageNum);
 			switch (messageNum) {
-			case 0:
-				break;
 			case 1:
 				ringBuffer->Get(&frame, &contour);
 				if (contour != Rect{-1,-1,-1,-1}) rectangle(frame, Point(contour.x, contour.y), Point(contour.x + contour.width, contour.y + contour.height), Scalar(0, 0, 255), 3);
 				imshow("image", frame);         //‰æ‘œ‚ğ•\¦D
-				break;
-			case 2:
 				break;
 			default:
 				break;
