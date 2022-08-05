@@ -32,7 +32,6 @@ void RingBuffer::Put(Mat frame) {
 	tail = (tail + 1) % m_capacity;
 }
 void RingBuffer::PutDetect(Rect contour) {
-	cout << headDetect<< endl;
 	coord[headDetect] = contour;
 	headDetect = (headDetect + 1) % m_capacity;
 }
