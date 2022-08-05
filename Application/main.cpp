@@ -30,12 +30,19 @@ int main() {
 
 	Capture* capture;
 	capture = new Capture(j["fps"]);
-	if (capture->Check() == -1) return -1;
-	thread capThread(&Capture::CapImage, capture, &ringBuffer, &imgGetMessage, &keyMessage);
-	thread detThread(&Detect::faceDetection, &detect, &ringBuffer, &imgGetMessage, &coordGetMessage, &keyMessage);
-	thread viewThread(&Viewer::view, &viewer, &ringBuffer, &coordGetMessage, &keyMessage);
-	capThread.join();
-	detThread.join();
-	viewThread.join();
+	try
+	{
+		if (capture->Check() == -1) throw "カメラが正常にオープンしませんでした。";
+		thread capThread(&Capture::CapImage, capture, &ringBuffer, &imgGetMessage, &keyMessage);
+		thread detThread(&Detect::faceDetection, &detect, &ringBuffer, &imgGetMessage, &coordGetMessage, &keyMessage);
+		thread viewThread(&Viewer::view, &viewer, &ringBuffer, &coordGetMessage, &keyMessage);
+		capThread.join();
+		detThread.join();
+		viewThread.join();
+	}
+	catch (char *exception)
+	{
+		cout << exception << endl;
+	}
 	return 0;
 }
