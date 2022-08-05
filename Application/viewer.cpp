@@ -13,8 +13,17 @@
 using namespace std;
 using namespace cv;
 
-void Viewer::view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage) {
+int Viewer::view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage, MsgQueue* keyMessage) {
 	while (1) {
+		if (!(keyMessage->empty())) {
+			keyMessage->receive(&messageNum);
+			switch (messageNum) {
+			case 2:
+				return 0;
+			default:
+				break;
+			}
+		}
 		if (!(coordGetMessage->empty())) {
 			coordGetMessage->receive(&messageNum);
 			switch (messageNum) {

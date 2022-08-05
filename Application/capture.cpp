@@ -26,9 +26,17 @@ int Capture::Check() {
 }
 
 //‰æ‘œ‚Ì•\¦
-void Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage) {
+int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage, MsgQueue* keyMessage) {
     while (cap.read(frame)) {
-
+        if (!(keyMessage->empty())) {
+            keyMessage->receive(&messageNum);
+            switch (messageNum) {
+            case 2:
+                return 0;
+            default:
+                break;
+            }
+        }
         ringBuffer->Put(frame);
         imgGetMessage->send(1);
     }

@@ -18,8 +18,9 @@ class Capture {
 private:
 	VideoCapture cap;
 	Mat frame;					//取得したフレーム
+	int messageNum;
 public:
 	Capture(int fps);			//コンストラクタ
 	int Check();			//カメラが正常にオープンしたことの確認
-	void CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage);		//画像の取得、保存
+	int CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage, MsgQueue* keyMessage);		//画像の取得、保存
 };

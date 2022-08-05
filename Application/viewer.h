@@ -19,5 +19,5 @@ private:
 	Rect contour;
 	int messageNum;
 public:
-	void view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage);
+	int view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage, MsgQueue* keyMessage);
 };

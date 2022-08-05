@@ -20,7 +20,7 @@ using json = nlohmann::json;
 
 int main() {
 	FILE* fp;
-	MsgQueue imgGetMessage, coordGetMessage;
+	MsgQueue imgGetMessage, coordGetMessage, keyMessage;
 	Detect detect;
 	Viewer viewer;
 	fopen_s(&fp, "../config/setting.json", "r");
@@ -31,9 +31,9 @@ int main() {
 	Capture* capture;
 	capture = new Capture(j["fps"]);
 	if (capture->Check() == -1) return -1;
-	thread capThread(&Capture::CapImage, capture, &ringBuffer, &imgGetMessage);
-	thread detThread(&Detect::faceDetection, &detect, &ringBuffer, &imgGetMessage, &coordGetMessage);
-	thread viewThread(&Viewer::view, &viewer, &ringBuffer, &coordGetMessage);
+	thread capThread(&Capture::CapImage, capture, &ringBuffer, &imgGetMessage, &keyMessage);
+	thread detThread(&Detect::faceDetection, &detect, &ringBuffer, &imgGetMessage, &coordGetMessage, &keyMessage);
+	thread viewThread(&Viewer::view, &viewer, &ringBuffer, &coordGetMessage, &keyMessage);
 	capThread.join();
 	detThread.join();
 	viewThread.join();
