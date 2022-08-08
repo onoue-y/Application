@@ -24,6 +24,7 @@ Capture::Capture(int fps) {
 //カメラが正常にオープンしたことの確認
 int Capture::Check() {
     if (!cap.isOpened()) return openError;
+    else return openSuccess;
 }
 
 //画像の表示

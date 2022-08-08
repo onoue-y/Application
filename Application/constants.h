@@ -10,6 +10,7 @@
 using namespace cv;
 
 const int openError = -1;
+const int openSuccess = 0;
 const Rect notDetect = { 0,0,0,0 };
 const int esc = 27;
 const int escMessage = 2;
