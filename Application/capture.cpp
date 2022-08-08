@@ -28,10 +28,10 @@ int Capture::Check() {
 }
 
 //‰æ‘œ‚Ì•\¦
-int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage, MsgQueue* keyMessage) {
+int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage) {
     while (cap.read(frame)) {
-        if (!(keyMessage->empty())) {
-            keyMessage->receive(&messageNum);
+        if (!(captureMessage->empty())) {
+            captureMessage->receive(&messageNum);
             switch (messageNum) {
             case escMessage:
                 return 0;
@@ -39,8 +39,8 @@ int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage, MsgQueue*
                 break;
             }
         }
-        while (ringBuffer->GetSize() == ringBuffer->GetCapacity());
+        //while (ringBuffer->GetSize() == ringBuffer->GetCapacity());
         ringBuffer->Put(frame);
-        imgGetMessage->send(getMessage);
+        detectMessage->send(getMessage);
     }
 }

@@ -21,7 +21,7 @@ using json = nlohmann::json;
 
 int main() {
 	FILE* fp;
-	MsgQueue imgGetMessage, coordGetMessage, keyMessage;
+	MsgQueue captureMessage, detectMessage, viewerMessage;
 	Detect detect;
 	Viewer viewer;
 	fopen_s(&fp, "../config/setting.json", "r");
@@ -34,9 +34,9 @@ int main() {
 	try
 	{
 		if (capture->Check() == openError) throw "カメラが正常にオープンしませんでした。";
-		thread capThread(&Capture::CapImage, capture, &ringBuffer, &imgGetMessage, &keyMessage);
-		thread detThread(&Detect::faceDetection, &detect, &ringBuffer, &imgGetMessage, &coordGetMessage, &keyMessage);
-		thread viewThread(&Viewer::view, &viewer, &ringBuffer, &coordGetMessage, &keyMessage);
+		thread capThread(&Capture::CapImage, capture, &ringBuffer, &captureMessage, &detectMessage, &viewerMessage);
+		thread detThread(&Detect::faceDetection, &detect, &ringBuffer, &captureMessage, &detectMessage, &viewerMessage);
+		thread viewThread(&Viewer::view, &viewer, &ringBuffer, &captureMessage, &detectMessage, &viewerMessage);
 		capThread.join();
 		detThread.join();
 		viewThread.join();

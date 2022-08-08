@@ -14,19 +14,10 @@
 using namespace std;
 using namespace cv;
 
-int Viewer::view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage, MsgQueue* keyMessage) {
+void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage) {
 	while (true) {
-		if (!(keyMessage->empty())) {
-			keyMessage->receive(&messageNum);
-			switch (messageNum) {
-			case escMessage:
-				return 0;
-			default:
-				break;
-			}
-		}
-		if (!(coordGetMessage->empty())) {
-			coordGetMessage->receive(&messageNum);
+		if (!(viewerMessage->empty())) {
+			viewerMessage->receive(&messageNum);
 			switch (messageNum) {
 			case getMessage:
 				ringBuffer->Get(&frame, &contour);
@@ -37,7 +28,12 @@ int Viewer::view(RingBuffer* ringBuffer, MsgQueue* coordGetMessage, MsgQueue* ke
 				break;
 			}
 		}
-		const int key = waitKey(waitSecond);
-		if (key == esc) exit(0); //キーコード [Esc]:27
+		int key = waitKey(waitSecond);
+		if (key == esc) {
+			// 各スレッドの終了メッセージ送信
+			captureMessage->send(escMessage);
+			detectMessage->send(escMessage);
+			break;
+		}
 	}
 }

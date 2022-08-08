@@ -23,5 +23,5 @@ private:
 public:
 	Capture(int fps);			//コンストラクタ
 	int Check();			//カメラが正常にオープンしたことの確認
-	int CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage, MsgQueue* keyMessage);		//画像の取得、保存
+	int CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage);		//画像の取得、保存
 };
