@@ -38,6 +38,7 @@ int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* imgGetMessage, MsgQueue*
                 break;
             }
         }
+        while (ringBuffer->GetSize() == ringBuffer->GetCapacity());
         ringBuffer->Put(frame);
         imgGetMessage->send(getMessage);
     }

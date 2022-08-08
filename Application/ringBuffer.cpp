@@ -50,3 +50,9 @@ bool RingBuffer::Get(Mat* frame, Rect* contour) {
 void RingBuffer::GetDetect(Mat* frame) {
 	*frame = img[headDetect];
 }
+int RingBuffer::GetSize() {
+	return size;
+}
+int RingBuffer::GetCapacity() {
+	return m_capacity;
+}
