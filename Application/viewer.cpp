@@ -4,6 +4,7 @@
 #include "ringBuffer.h"
 #include "msgQueue.h"
 #include "constants.h"
+#include "logQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -14,7 +15,7 @@
 using namespace std;
 using namespace cv;
 
-void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage) {
+void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue) {
 	while (true) {
 		if (!(viewerMessage->empty())) {
 			viewerMessage->receive(&messageNum);

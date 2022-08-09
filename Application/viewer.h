@@ -4,6 +4,7 @@
 #include "ringBuffer.h"
 #include "msgQueue.h"
 #include "constants.h"
+#include "logQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -20,5 +21,5 @@ private:
 	Rect contour;
 	int messageNum;
 public:
-	void view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage);
+	void view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);
 };

@@ -15,6 +15,7 @@ const Rect notDetect = { 0,0,0,0 };
 const int esc = 27;
 const int escMessage = 0;
 const int getMessage = 1;
+const int logRequestMessage = 2;
 const int blue = 0;
 const int green = 0;
 const int red = 255;

@@ -4,6 +4,7 @@
 #include "ringBuffer.h"
 #include "msgQueue.h"
 #include "constants.h"
+#include "logQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -14,7 +15,7 @@
 using namespace std;
 using namespace cv;
 
-int Detect::faceDetection(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage) {
+int Detect::faceDetection(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue) {
 	cascade.load("C:/opencv/build/etc/haarcascades/haarcascade_frontalface_default.xml");
 	while (true) {
 		if (!(detectMessage->empty())) {

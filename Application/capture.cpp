@@ -2,6 +2,7 @@
 #include "ringBuffer.h"
 #include "msgQueue.h"
 #include "constants.h"
+#include "logQueue.h"
 #include <opencv2/opencv.hpp>
 #include <vector>
 
@@ -28,8 +29,11 @@ int Capture::Check() {
 }
 
 //‰æ‘œ‚Ì•\Ž¦
-int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage) {
+int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue) {
     while (cap.read(frame)) {
+        display_frame = frame.clone();
+        logqueue->send({"capture", "", NULL, display_frame, notDetect});
+        logMessage->send(2);
         if (!(captureMessage->empty())) {
             captureMessage->receive(&messageNum);
             switch (messageNum) {
@@ -40,7 +44,6 @@ int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue
             }
         }
         if (ringBuffer->GetSize() != ringBuffer->GetCapacity()) {
-            display_frame = frame.clone();
             ringBuffer->Put(display_frame);
             detectMessage->send(getMessage);
         }
