@@ -1,8 +1,9 @@
 #pragma once
 #include <opencv2/opencv.hpp>
-#include <queue>
 #include <vector>
 #include "ringBuffer.h"
+#include "msgQueue.h"
+#include "constants.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -20,5 +21,5 @@ private:
 	vector<Rect> contour;		//検出した顔の座標データ(x,y,width,height)
 	int messageNum;
 public:
-	void faceDetection(RingBuffer* ringBuffer, queue<int>* message1, queue<int>* message2);
+	int faceDetection(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage);
 };

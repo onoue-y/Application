@@ -1,6 +1,7 @@
 #include <memory>
 #include <opencv2/opencv.hpp>
 #include "ringBuffer.h"
+#include "constants.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -15,20 +16,19 @@ RingBuffer::RingBuffer(unsigned int capacity) {
 	m_capacity = capacity;
 	img = make_unique<Mat[]>(m_capacity);
 	coord = make_unique<Rect[]>(m_capacity);
-	num = 0;
+	size = 0;
 	head = 0;
 	tail = 0;
 	headDetect = 0;
 }
-void RingBuffer::Put(Mat frame, Rect contour) {
-	if ((head == tail) && (num>=m_capacity)) {
+void RingBuffer::Put(Mat frame) {
+	if ((head == tail) && (size>=m_capacity)) {
 		head = (head + 1) % m_capacity;
 		headDetect = (headDetect + 1) % m_capacity;
-		num--;
+		size--;
 	}
 	img[tail] = frame;
-	coord[tail] = contour;
-	num++;
+	size++;
 	tail = (tail + 1) % m_capacity;
 }
 void RingBuffer::PutDetect(Rect contour) {
@@ -36,11 +36,11 @@ void RingBuffer::PutDetect(Rect contour) {
 	headDetect = (headDetect + 1) % m_capacity;
 }
 bool RingBuffer::Get(Mat* frame, Rect* contour) {
-	if (num != 0) {
+	if (size != 0) {
 		*frame = img[head];
 		*contour = coord[head];
 		head = (head + 1) % m_capacity;
-		num--;
+		size--;
 		return true;
 	}
 	else {
@@ -50,8 +50,9 @@ bool RingBuffer::Get(Mat* frame, Rect* contour) {
 void RingBuffer::GetDetect(Mat* frame) {
 	*frame = img[headDetect];
 }
-void RingBuffer::Clear() {
-	num = 0;
-	head = 0;
-	tail = 0;
+int RingBuffer::GetSize() {
+	return size;
+}
+int RingBuffer::GetCapacity() {
+	return m_capacity;
 }

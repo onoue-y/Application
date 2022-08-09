@@ -2,8 +2,9 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include <queue>
 #include "ringBuffer.h"
+#include "msgQueue.h"
+#include "constants.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -17,9 +18,10 @@ using namespace cv;
 class Capture {
 private:
 	VideoCapture cap;
-	Mat frame;					//取得したフレーム
+	Mat frame, display_frame;					//取得したフレーム
+	int messageNum;
 public:
 	Capture(int fps);			//コンストラクタ
 	int Check();			//カメラが正常にオープンしたことの確認
-	void CapImage(RingBuffer* ringBuffer, queue<int>* message1);		//画像の取得、保存
+	int CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage);		//画像の取得、保存
 };

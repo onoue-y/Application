@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <opencv2/opencv.hpp>
+#include "constants.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -16,15 +17,16 @@ using namespace cv;
 class RingBuffer {
 private:
 	unsigned int m_capacity;
-	unsigned int num;
+	unsigned int size;
 	unique_ptr<Mat[]> img;
 	unique_ptr<Rect[]> coord;
 	int head, tail, headDetect;
 public:
 	RingBuffer(unsigned int capacity);
-	void Put(Mat frame, Rect contour);
+	void Put(Mat frame);
 	void PutDetect(Rect contour);
 	bool Get(Mat* frame, Rect* contour);
 	void GetDetect(Mat* frame);
-	void Clear();
+	int GetSize();
+	int GetCapacity();
 };

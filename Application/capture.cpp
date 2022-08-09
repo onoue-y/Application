@@ -1,8 +1,9 @@
 #include "capture.h"
 #include "ringBuffer.h"
+#include "msgQueue.h"
+#include "constants.h"
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include <queue>
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -22,14 +23,27 @@ Capture::Capture(int fps) {
 
 //カメラが正常にオープンしたことの確認
 int Capture::Check() {
-    if (!cap.isOpened()) return -1;
+    if (!cap.isOpened()) return openError;
+    else return openSuccess;
 }
 
 //画像の表示
-void Capture::CapImage(RingBuffer* ringBuffer, queue<int>* message1) {
+int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage) {
     while (cap.read(frame)) {
-
-        ringBuffer->Put(frame, {0,0,0,0});
-        message1->push(1);
+        if (!(captureMessage->empty())) {
+            captureMessage->receive(&messageNum);
+            switch (messageNum) {
+            case escMessage:
+                return 0;
+            default:
+                break;
+            }
+        }
+        if (ringBuffer->GetSize() != ringBuffer->GetCapacity()) {
+            display_frame = frame.clone();
+            ringBuffer->Put(display_frame);
+            detectMessage->send(getMessage);
+        }
     }
+    return 0;
 }

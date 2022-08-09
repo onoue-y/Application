@@ -9,7 +9,7 @@ project(Project)
 find_package(OpenCV REQUIRED)
 
 # a.outという実行ファイルを作成
-add_executable(Project main.cpp capture.cpp detect.cpp viewer.cpp ringBuffer.cpp)
+add_executable(Project main.cpp capture.cpp detect.cpp viewer.cpp ringBuffer.cpp msgQueue.cpp)
 
 
 target_link_libraries(Project ${OpenCV_LIBS})
