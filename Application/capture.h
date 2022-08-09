@@ -18,7 +18,7 @@ using namespace cv;
 class Capture {
 private:
 	VideoCapture cap;
-	Mat frame;					//取得したフレーム
+	Mat frame, display_frame;					//取得したフレーム
 	int messageNum;
 public:
 	Capture(int fps);			//コンストラクタ

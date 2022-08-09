@@ -39,8 +39,11 @@ int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue
                 break;
             }
         }
-        //while (ringBuffer->GetSize() == ringBuffer->GetCapacity());
-        ringBuffer->Put(frame);
-        detectMessage->send(getMessage);
+        if (ringBuffer->GetSize() != ringBuffer->GetCapacity()) {
+            display_frame = frame.clone();
+            ringBuffer->Put(display_frame);
+            detectMessage->send(getMessage);
+        }
     }
+    return 0;
 }
