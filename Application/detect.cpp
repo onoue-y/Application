@@ -25,6 +25,8 @@ int Detect::faceDetection(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQ
 				return 0;
 			case getMessage:
 				ringBuffer->GetDetect(&frame);
+				logqueue->send({ "detect", "msg", 1, &frame, notDetect, -1 });
+				logMessage->send(2);
 				cascade.detectMultiScale(frame, contour, scaleFactor, minNeighbors, flags, Size(minsize, minsize));
 				if (contour.size() != 0) ringBuffer->PutDetect(contour[0]);
 				else ringBuffer->PutDetect(notDetect);

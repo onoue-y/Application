@@ -21,11 +21,14 @@ private:
 	int hour;
 	int minute;
 	int second;
-	int minsecond;
+	__int64 millisec;
 	logQueue::infoLog info;
 
 public:
 	Log();
-	void makeLog(MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);
+	int makeLog(MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);
 	void getDay();
+	void getFilename();
+	void resetStr();
+	void getLog(logQueue* logqueue);
 };

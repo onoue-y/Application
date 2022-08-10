@@ -32,7 +32,7 @@ int Capture::Check() {
 int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue) {
     while (cap.read(frame)) {
         display_frame = frame.clone();
-        logqueue->send({"capture", "", NULL, display_frame, notDetect});
+        logqueue->send({"capture", "", -1, &display_frame, notDetect, -1});
         logMessage->send(2);
         if (!(captureMessage->empty())) {
             captureMessage->receive(&messageNum);
