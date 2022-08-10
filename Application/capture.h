@@ -22,6 +22,7 @@ private:
 	Mat frame, display_frame;					//取得したフレーム
 	Mat* frameAddress;
 	int messageNum;
+	bool captureFlag;
 public:
 	Capture(int fps);			//コンストラクタ
 	int Check();			//カメラが正常にオープンしたことの確認

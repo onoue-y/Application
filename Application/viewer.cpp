@@ -42,5 +42,11 @@ void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* de
 			logMessage->send(escMessage);
 			break;
 		}
+		if (key == s) {
+			logqueue->send({ "viewer", "Key-in", -1, nullptr, notDetect, s });
+			logMessage->send(2);
+			//captureの一時停止・再開メッセージ送信
+			captureMessage->send(sMessage);
+		}
 	}
 }
