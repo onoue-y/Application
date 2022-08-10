@@ -32,7 +32,7 @@ int Capture::Check() {
 int Capture::CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue) {
     while (cap.read(frame)) {
         display_frame = frame.clone();
-        frameAddress = ringBuffer->GetAddress(2);
+        frameAddress = ringBuffer->GetAddress(TAIL);    //tailの位置のframeアドレスを取得
         logqueue->send({"capture", "", -1, frameAddress, notDetect, -1});
         logMessage->send(2);
         if (!(captureMessage->empty())) {

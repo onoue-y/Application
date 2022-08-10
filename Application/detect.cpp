@@ -24,7 +24,7 @@ int Detect::faceDetection(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQ
 			case escMessage:
 				return 0;
 			case getMessage:
-				frameAddress = ringBuffer->GetAddress(3);
+				frameAddress = ringBuffer->GetAddress(HEAD_DETECT);	//headDetectの位置のframeアドレスを取得
 				ringBuffer->GetDetect(&frame);
 				logqueue->send({ "detect", "msg", 1, frameAddress, notDetect, -1 });
 				logMessage->send(2);

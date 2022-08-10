@@ -16,10 +16,9 @@ using chrono::system_clock;
 Log::Log() {
 	getDay();
 	getFilename();
-	filename = str.str() + ".txt";
+	filename = "../logs/" + str.str() + ".txt";
 	fopen_s(&fp, filename.c_str(), "a+");
 	resetStr();
-	fclose(fp);
 }
 int Log::makeLog(MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue) {
 	while (true) {
@@ -27,13 +26,12 @@ int Log::makeLog(MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* vi
 			logMessage->receive(&messageNum);
 			switch (messageNum) {
 			case escMessage:
+				fclose(fp);
 				return 0;
 			case logRequestMessage:
 				getDay();
 				getLog(logqueue);
-				fopen_s(&fp, filename.c_str(), "a+");
 				fputs(log.c_str(), fp);
-				fclose(fp);
 				resetStr();
 				break;
 			default:

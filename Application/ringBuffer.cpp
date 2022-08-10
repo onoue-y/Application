@@ -51,13 +51,13 @@ void RingBuffer::GetDetect(Mat* frame) {
 	*frame = img[headDetect];
 }
 Mat* RingBuffer::GetAddress(int thread) {
-	if (thread == 1) {
+	if (thread == HEAD) {
 		return &(img[head]);
 	}
-	else if (thread == 2) {
+	else if (thread == TAIL) {
 		return &(img[tail]);
 	}
-	else if (thread == 3) {
+	else if (thread == HEAD_DETECT) {
 		return &(img[headDetect]);
 	}
 	else {

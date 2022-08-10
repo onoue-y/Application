@@ -21,7 +21,7 @@ void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* de
 			viewerMessage->receive(&messageNum);
 			switch (messageNum) {
 			case getMessage:
-				frameAddress = ringBuffer->GetAddress(1);
+				frameAddress = ringBuffer->GetAddress(HEAD);	//headの位置のframeアドレスを取得
 				ringBuffer->Get(&frame, &contour);
 				logqueue->send({ "viewer", "msg", 1, frameAddress, contour, -1 });
 				logMessage->send(2);

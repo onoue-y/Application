@@ -25,3 +25,6 @@ const double scaleFactor = 1.1;
 const int minNeighbors = 3;
 const int flags = 0;
 const int minsize = 30;
+const int HEAD = 1;
+const int TAIL = 2;
+const int HEAD_DETECT = 3;
