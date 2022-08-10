@@ -19,6 +19,7 @@ class Detect {
 private:
 	CascadeClassifier cascade;
 	Mat frame;					//取得したフレーム
+	Mat* frameAddress;
 	vector<Rect> contour;		//検出した顔の座標データ(x,y,width,height)
 	int messageNum;
 public:

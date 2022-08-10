@@ -86,7 +86,7 @@ void Log::getLog(logQueue* logqueue) {
 	str << "[" << info.threadName << "]";
 	str << info.timing;
 	if (info.messageNum != -1) str << "<" << info.messageNum << ">";
-	str << "<" << info.frameAdd << ">";
+	if (info.frameAdd != nullptr) str << "<" << info.frameAdd << ">";
 	if (info.coordinate != notDetect) str << "<" << info.coordinate << ">";
 	if (info.key != -1) str << "<" << info.key << ">";
 	log = str.str() + "\n";

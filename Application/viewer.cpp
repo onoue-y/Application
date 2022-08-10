@@ -21,8 +21,9 @@ void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* de
 			viewerMessage->receive(&messageNum);
 			switch (messageNum) {
 			case getMessage:
+				frameAddress = ringBuffer->GetAddress(1);
 				ringBuffer->Get(&frame, &contour);
-				logqueue->send({ "viewer", "msg", 1, &frame, contour, -1 });
+				logqueue->send({ "viewer", "msg", 1, frameAddress, contour, -1 });
 				logMessage->send(2);
 				if (contour != notDetect) rectangle(frame, Point(contour.x, contour.y), Point(contour.x + contour.width, contour.y + contour.height), Scalar(blue, green, red), thickness);
 				imshow("image", frame);         //画像を表示．
@@ -33,7 +34,7 @@ void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* de
 		}
 		int key = waitKey(waitSecond);
 		if (key == esc) {
-			logqueue->send({ "viewer", "Key-in", -1, &frame, notDetect, esc });
+			logqueue->send({ "viewer", "Key-in", -1, nullptr, notDetect, esc });
 			logMessage->send(2);
 			// 各スレッドの終了メッセージ送信
 			captureMessage->send(escMessage);

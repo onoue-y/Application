@@ -18,6 +18,7 @@ using namespace cv;
 class Viewer {
 private:
 	Mat frame;
+	Mat* frameAddress;
 	Rect contour;
 	int messageNum;
 public:

@@ -27,6 +27,7 @@ public:
 	void PutDetect(Rect contour);
 	bool Get(Mat* frame, Rect* contour);
 	void GetDetect(Mat* frame);
+	Mat* GetAddress(int thread);
 	int GetSize();
 	int GetCapacity();
 };

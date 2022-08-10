@@ -20,6 +20,7 @@ class Capture {
 private:
 	VideoCapture cap;
 	Mat frame, display_frame;					//取得したフレーム
+	Mat* frameAddress;
 	int messageNum;
 public:
 	Capture(int fps);			//コンストラクタ
