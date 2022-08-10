@@ -22,6 +22,8 @@ private:
 	Mat* frameAddress;
 	vector<Rect> contour;		//検出した顔の座標データ(x,y,width,height)
 	int messageNum;
+	bool detectFlag;
 public:
+	Detect();
 	int faceDetection(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);
 };
