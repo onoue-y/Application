@@ -4,6 +4,7 @@
 #include "ringBuffer.h"
 #include "msgQueue.h"
 #include "constants.h"
+#include "logQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -18,8 +19,11 @@ class Detect {
 private:
 	CascadeClassifier cascade;
 	Mat frame;					//取得したフレーム
+	Mat* frameAddress;
 	vector<Rect> contour;		//検出した顔の座標データ(x,y,width,height)
 	int messageNum;
+	bool detectFlag;
 public:
-	int faceDetection(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage);
+	Detect();
+	int faceDetection(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);
 };

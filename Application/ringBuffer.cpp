@@ -50,6 +50,20 @@ bool RingBuffer::Get(Mat* frame, Rect* contour) {
 void RingBuffer::GetDetect(Mat* frame) {
 	*frame = img[headDetect];
 }
+Mat* RingBuffer::GetAddress(int thread) {
+	if (thread == HEAD) {
+		return &(img[head]);
+	}
+	else if (thread == TAIL) {
+		return &(img[tail]);
+	}
+	else if (thread == HEAD_DETECT) {
+		return &(img[headDetect]);
+	}
+	else {
+		return nullptr;
+	}
+}
 int RingBuffer::GetSize() {
 	return size;
 }

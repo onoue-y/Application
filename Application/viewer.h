@@ -4,6 +4,7 @@
 #include "ringBuffer.h"
 #include "msgQueue.h"
 #include "constants.h"
+#include "logQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -17,8 +18,11 @@ using namespace cv;
 class Viewer {
 private:
 	Mat frame;
+	Mat* frameAddress;
 	Rect contour;
 	int messageNum;
+	bool viewerFlag;
 public:
-	void view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage);
+	Viewer();
+	void view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);
 };

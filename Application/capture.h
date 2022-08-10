@@ -5,6 +5,7 @@
 #include "ringBuffer.h"
 #include "msgQueue.h"
 #include "constants.h"
+#include "logQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_world455d.lib")
@@ -19,9 +20,11 @@ class Capture {
 private:
 	VideoCapture cap;
 	Mat frame, display_frame;					//取得したフレーム
+	Mat* frameAddress;
 	int messageNum;
+	bool captureFlag;
 public:
 	Capture(int fps);			//コンストラクタ
 	int Check();			//カメラが正常にオープンしたことの確認
-	int CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage);		//画像の取得、保存
+	int CapImage(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);		//画像の取得、保存
 };
