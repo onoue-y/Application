@@ -15,6 +15,7 @@ const Rect notDetect = { 0,0,0,0 };
 const int esc = 27;
 const int s = 115;
 const int d = 100;
+const int v = 118;
 const int escMessage = 0;
 const int getMessage = 1;
 const int logRequestMessage = 2;

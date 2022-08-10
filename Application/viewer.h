@@ -21,6 +21,8 @@ private:
 	Mat* frameAddress;
 	Rect contour;
 	int messageNum;
+	bool viewerFlag;
 public:
+	Viewer();
 	void view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);
 };

@@ -15,6 +15,9 @@
 using namespace std;
 using namespace cv;
 
+Viewer::Viewer() {
+	viewerFlag = true;
+}
 void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue) {
 	while (true) {
 		if (!(viewerMessage->empty())) {
@@ -25,7 +28,9 @@ void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* de
 				ringBuffer->Get(&frame, &contour);
 				logqueue->send({ "viewer", "msg", 1, frameAddress, contour, -1 });
 				logMessage->send(2);
-				if (contour != notDetect) rectangle(frame, Point(contour.x, contour.y), Point(contour.x + contour.width, contour.y + contour.height), Scalar(blue, green, red), thickness);
+				if (viewerFlag) {
+					if (contour != notDetect) rectangle(frame, Point(contour.x, contour.y), Point(contour.x + contour.width, contour.y + contour.height), Scalar(blue, green, red), thickness);
+				}
 				imshow("image", frame);         //画像を表示．
 				break;
 			default:
@@ -53,6 +58,11 @@ void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* de
 			logMessage->send(2);
 			//検出枠のON/OFFメッセージ送信
 			detectMessage->send(dMessage);
+		}
+		else if (key == v) {
+			logqueue->send({ "viewer", "Key-in", -1, nullptr, notDetect, v });
+			logMessage->send(2);
+			viewerFlag = !viewerFlag;
 		}
 	}
 }
