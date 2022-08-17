@@ -21,6 +21,7 @@ private:
 	unique_ptr<Mat[]> img;
 	unique_ptr<Rect[]> coord;
 	int head, tail, headDetect;
+	int m_delay;
 public:
 	RingBuffer(unsigned int capacity);
 	void Put(Mat frame);
@@ -30,4 +31,5 @@ public:
 	Mat* GetAddress(int thread);
 	int GetSize();
 	int GetCapacity();
+	void SetDelay(int delay);
 };

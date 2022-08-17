@@ -22,7 +22,9 @@ private:
 	Rect contour;
 	int messageNum;
 	bool viewerFlag;
+	bool delayFlag;
+	int m_delay;
 public:
-	Viewer();
+	Viewer(int delay);
 	void view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue);
 };

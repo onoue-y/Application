@@ -26,11 +26,11 @@ int main() {
 	MsgQueue captureMessage, detectMessage, viewerMessage, logMessage;
 	logQueue logqueue;
 	Detect detect;
-	Viewer viewer;
 	Log log;
 	fopen_s(&fp, "../config/setting.json", "r");
 	auto j = json::parse(fp);
 	fclose(fp);
+	Viewer viewer(j["delay"]);
 	RingBuffer ringBuffer(j["bufferSize"]);
 
 	Capture* capture;

@@ -37,8 +37,8 @@ void RingBuffer::PutDetect(Rect contour) {
 }
 bool RingBuffer::Get(Mat* frame, Rect* contour) {
 	if (size != 0) {
-		*frame = img[head];
-		*contour = coord[head];
+		*frame = img[head - m_delay];
+		*contour = coord[head - m_delay];
 		head = (head + 1) % m_capacity;
 		size--;
 		return true;
@@ -52,7 +52,7 @@ void RingBuffer::GetDetect(Mat* frame) {
 }
 Mat* RingBuffer::GetAddress(int thread) {
 	if (thread == HEAD) {
-		return &(img[head]);
+		return &(img[head - m_delay]);
 	}
 	else if (thread == TAIL) {
 		return &(img[tail]);
@@ -69,4 +69,7 @@ int RingBuffer::GetSize() {
 }
 int RingBuffer::GetCapacity() {
 	return m_capacity;
+}
+void RingBuffer::SetDelay(int delay) {
+	m_delay = delay;
 }

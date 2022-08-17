@@ -15,7 +15,9 @@
 using namespace std;
 using namespace cv;
 
-Viewer::Viewer() {
+Viewer::Viewer(int delay) {
+	m_delay = delay;
+	delayFlag = false;
 	viewerFlag = true;
 }
 void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* detectMessage, MsgQueue* viewerMessage, MsgQueue* logMessage, logQueue* logqueue) {
@@ -24,6 +26,7 @@ void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* de
 			viewerMessage->receive(&messageNum);
 			switch (messageNum) {
 			case getMessage:
+				ringBuffer->SetDelay(m_delay * delayFlag);
 				frameAddress = ringBuffer->GetAddress(HEAD);	//headの位置のframeアドレスを取得
 				ringBuffer->Get(&frame, &contour);
 				logqueue->send({ "viewer", "msg", 1, frameAddress, contour, -1 });
@@ -63,6 +66,11 @@ void Viewer::view(RingBuffer* ringBuffer, MsgQueue* captureMessage, MsgQueue* de
 			logqueue->send({ "viewer", "Key-in", -1, nullptr, notDetect, v });
 			logMessage->send(2);
 			viewerFlag = !viewerFlag;
+		}
+		else if (key == e) {
+			logqueue->send({ "viewer", "Key-in", -1, nullptr, notDetect, e });
+			logMessage->send(2);
+			delayFlag = !delayFlag;
 		}
 	}
 }
